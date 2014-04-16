@@ -1,0 +1,6 @@
+---
+# Handler to handle web tier notifications
+
+- name: restart apache
+  service: name=apache2 state=restarted
+

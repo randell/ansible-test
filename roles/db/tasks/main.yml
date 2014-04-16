@@ -1,0 +1,28 @@
+---
+# This role will install MySQL and create db user and give permissions.
+
+- name: Install Mysql package
+  apt: pkg={{ item }} state=present
+  with_items:
+   - mysql-server
+   - python-mysqldb
+
+- name: Start Mysql Service
+  service: name=mysql state=started enabled=true
+
+- name: Create Global Mysql configuration file
+  template: src=my.cnf.j2 dest=/etc/mysql/my.cnf
+  notify:
+  - restart mysql
+
+# - name: Create Local Mysql configuration file
+#   template: src=my.cnf.local.j2 dest=/root/.my.cnf
+
+# - name: Secure MySQL
+#   include: secure_mysql.yml
+
+- name: Create Application Database
+  mysql_db: name={{ dbname }} state=present
+
+- name: Create Application DB User
+  mysql_user:  name={{ dbuser }} password={{ upassword }} priv=*.*:ALL host='%' state=present

@@ -1,0 +1,12 @@
+---
+# This role installs apache
+
+- name: Install apache
+  apt: pkg={{ item }} state=present
+  with_items:
+   - apache2
+   - libapache2-mod-php5
+   - libapache2-mod-auth-mysql
+
+- name: apache service state
+  service: name=apache2 state=started enabled=yes

@@ -1,0 +1,25 @@
+---
+# httpd is handled by the base-apache role upstream
+- name: Install php and git
+  apt: pkg={{ item }} state=present
+  with_items:
+   - php5
+   - php5-mysqlnd
+   - git
+  notify:
+  - restart apache
+
+- name: Remove default index.html
+  file: path=/var/www/index.html state=absent
+
+- name: Creates the index.php file
+  template: src=index.php.j2 dest=/var/www/index.php
+
+- name: Copy the code from repository
+  git: repo={{ repository }}
+       dest=/var/www/wordpress
+       depth=1
+       version={{ version }}
+
+- name: Set proper permission for /var/www
+  file: path=/var/www owner=www-data mode=755 recurse=yes
