@@ -15,11 +15,11 @@
 - name: Creates the index.php file
   template: src=index.php.j2 dest=/var/www/index.php
 
-- name: Copy the code from repository
-  git: repo={{ repository }}
-       dest=/var/www/wordpress
-       depth=1
-       version={{ version }}
+# - name: Copy the code from repository
+#   git: repo={{ repository }}
+#        dest=/var/www/wordpress
+#        depth=1
+#        version={{ version }}
 
 - name: Set proper permission for /var/www
   file: path=/var/www owner=www-data mode=755 recurse=yes
