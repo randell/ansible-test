@@ -35,3 +35,12 @@ The goal of this exercise is to setup a LAMP cluster on ec2/vagrant with Ansible
 * Vagrant:
 
         vagrant destroy -f
+        
+##Troubleshooting
+
+* You cannot re-execute the ec2 playbooks without killing all the exisiting instances.
+* You can re-execute the vagrant playbooks by:
+
+        vagrant provision lb1
+
+
