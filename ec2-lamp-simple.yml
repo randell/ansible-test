@@ -27,7 +27,7 @@
 
     - include: ec2-instance.yml
       vars:
-        groupname: lamp-simple
+        groupname: webservers,dbservers
         count: 1
 
     - name: Wait for SSH to be available
