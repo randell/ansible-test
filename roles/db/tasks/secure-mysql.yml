@@ -1,0 +1,19 @@
+---
+
+- name: Secure mysql root user
+  mysql_user: name=root host={{ item }} password={{ root_password }} 
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  ignore_errors: yes
+
+- name: remove anonymous MySQL server user for current host
+  action: mysql_user user="" host={{ ansible_hostname }} state=absent
+
+- name: remove anonymous MySQL server user for localhost
+  action: mysql_user user="" state=absent
+
+- name: remove the MySQL test database
+  action: mysql_db db=test state=absent

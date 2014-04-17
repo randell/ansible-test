@@ -19,7 +19,7 @@
 #   template: src=my.cnf.local.j2 dest=/root/.my.cnf
 
 # - name: Secure MySQL
-#   include: secure_mysql.yml
+#   include: secure-mysql.yml
 
 - name: Create Application Database
   mysql_db: name={{ dbname }} state=present
