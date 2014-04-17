@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	     "lbservers" => ["lb1"],
 	     "all_groups:children" => ["webservers", "dbservers", "lbservers"]
 	   	}
-	   	ansible.playbook = "site.yml"
+	   	ansible.playbook = "lamp-cluster.yml"
 	    ansible.extra_vars = { 
         ansible_ssh_user: 'vagrant',
         iface: 'eth1'

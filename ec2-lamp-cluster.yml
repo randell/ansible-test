@@ -41,4 +41,4 @@
         groupname: lbservers
         count: 1
 
-- include: site.yml
+- include: lamp-cluster.yml
