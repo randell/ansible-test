@@ -4,9 +4,9 @@ ansible-test
 The goal of this exercise is to setup a LAMP cluster on ec2/vagrant with Ansible.
 
 ##Prerequisites:
-* Ansible
+* Ansible v1.5+
 * Boto and ~/.boto file configured with your AWS credentials.
-* Vagrant
+* Vagrant v1.5+
 
 ##How to deploy:
 * EC2 Cluster
