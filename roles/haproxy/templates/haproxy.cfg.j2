@@ -22,10 +22,13 @@ defaults
         clitimeout      50000
         srvtimeout      50000
 
-listen {{ daemonname }} {{ hostvars['lb1']['ansible_' + iface].ipv4.address }}:{{ listenport }}
+backend app
+    {% for host in groups['lbservers'] %}
+        listen {{ daemonname }} {{ hostvars[host]['ansible_' + iface].ipv4.address }}:{{ listenport }}
+    {% endfor %}
+        balance     {{ balance }}
+    {% for host in groups['webservers'] %}
+        server {{ hostvars[host].ansible_hostname }} {{ hostvars[host]['ansible_' + iface].ipv4.address }}:{{ httpd_port }} cookie {{ hostvars[host].ansible_hostname }} check
+    {% endfor %}
         stats enable
         stats uri /haproxy?stats
-        balance {{ balance }}
-        {% for host in groups['webservers'] %}
-            server {{ hostvars[host].ansible_hostname }} {{ hostvars[host]['ansible_' + iface].ipv4.address }}:{{ httpd_port }} cookie {{ hostvars[host].ansible_hostname }} check
-        {% endfor %}

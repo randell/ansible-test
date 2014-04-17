@@ -6,9 +6,11 @@ echo "\nX-Forwarded-for: ".$_SERVER['HTTP_X_FORWARDED_FOR'];
 
 
 echo  "\nList of Databases:\n";
-        {% for host in groups['dbservers'] %}
-        $link = mysql_connect('{{ hostvars[host]['ansible_' + iface].ipv4.address }}', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].upassword }}') or die(mysql_error());
+
+		{% for host in groups['dbservers'] %}
+                $link = mysql_connect('{{ hostvars[host]['ansible_' + iface].ipv4.address }}', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].upassword }}') or die(mysql_error());
         {% endfor %}
+
         $res = mysql_query("SHOW DATABASES");
         while ($row = mysql_fetch_assoc($res)) {
                 echo "\t" . $row['Database'] . "\n";
