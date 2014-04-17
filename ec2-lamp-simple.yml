@@ -1,0 +1,33 @@
+---
+- name: EC2 Setup and Execution
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+  vars:
+    keypair_name: hootsuite # Must create this keypair manually
+    security_group: hootsuite-lamp-test
+    region: us-west-2
+
+  tasks:
+    - name: Create security group
+      local_action:
+        module: ec2_group
+        description: Hootsuite lamp stack test
+        region: "{{ region }}"
+        name: "{{ security_group }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+
+    - include: ec2-instance.yml
+      vars:
+        groupname: lamp-simple
+        count: 1
+
+- include: lamp-simple.yml

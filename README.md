@@ -15,7 +15,7 @@ The goal of this exercise is to setup a LAMP cluster on ec2/vagrant with Ansible
     
 * EC2 Single Node
 
-        wip
+        ansible-playbook -i local ec2-lamp-simple.yml
 
 * Locally using Vagrant
 

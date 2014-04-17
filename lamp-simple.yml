@@ -1,0 +1,12 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+# Configure and deploy database servers.
+- hosts: all
+  user: ubuntu
+  sudo: True
+  roles:
+  - common
+  - db
+  - base-apache
+  - web
