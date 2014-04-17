@@ -24,7 +24,7 @@ defaults
 
 backend app
     {% for host in groups['lbservers'] %}
-        listen {{ daemonname }} {{ hostvars[host]['ansible_' + iface].ipv4.address }}:{{ listenport }}
+        listen {{ daemonname }} 0.0.0.0:{{ listenport }}
     {% endfor %}
         balance     {{ balance }}
     {% for host in groups['webservers'] %}
