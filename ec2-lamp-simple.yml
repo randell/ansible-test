@@ -33,4 +33,4 @@
     - name: Wait for SSH to be available
       pause: minutes=1
 
-- include: lamp-simple.yml
+- include: site.yml

@@ -44,4 +44,4 @@
     - name: Wait for SSH to be available
       pause: minutes=1
 
-- include: lamp-cluster.yml
+- include: site.yml
