@@ -28,13 +28,13 @@
 
     - include: ec2-instance.yml
       vars:
-        groupname: webservers
-        count: "{{ webservers }}"
+        groupname: dbservers
+        count: 1
 
     - include: ec2-instance.yml
       vars:
-        groupname: dbservers
-        count: 1
+        groupname: webservers
+        count: "{{ webservers }}"
 
     - include: ec2-instance.yml
       vars:
