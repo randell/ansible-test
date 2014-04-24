@@ -10,21 +10,7 @@
     webservers: 2
 
   tasks:
-    - name: Create security group
-      local_action:
-        module: ec2_group
-        description: Hootsuite lamp stack test
-        region: "{{ region }}"
-        name: "{{ security_group }}"
-        rules:
-          - proto: tcp
-            from_port: 22
-            to_port: 22
-            cidr_ip: 0.0.0.0/0
-          - proto: tcp
-            from_port: 80
-            to_port: 80
-            cidr_ip: 0.0.0.0/0
+    - include: ec2-security-group.yml
 
     - include: ec2-instance.yml
       vars:
